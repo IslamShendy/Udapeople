@@ -153,7 +153,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: cimg/base:stable-20.04
+      - image: cimg/base:current
     steps:
       - checkout
       - install_awscli       
