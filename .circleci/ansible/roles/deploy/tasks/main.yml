@@ -1,0 +1,16 @@
+---
+
+- name: "Backend DIR" 
+  file:
+    path: ~/backed-application
+    state: directory
+
+- name: "unarchive files" 
+  unarchive:
+    src: artifact.tar.gz
+    dest: ~/backed-application
+
+- name: "Install dependencies" 
+  shell: |
+    cd ~/backed-application
+    npm i
