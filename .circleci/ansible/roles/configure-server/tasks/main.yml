@@ -12,5 +12,5 @@
 
 - name: "Install PM Global"
   npm:
-    name: PM2
+    name: pm2
     global: yes
