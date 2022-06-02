@@ -5,6 +5,11 @@
     path: ~/backed_application
     state: directory
 
+- name: "Copy compiled backend app"
+  copy:
+    src: artifact.tar.gz
+    dest: ~/backed_application
+
 - name: "unarchive files" 
   unarchive:
     src: artifact.tar.gz
