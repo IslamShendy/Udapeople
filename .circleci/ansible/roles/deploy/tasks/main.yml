@@ -2,15 +2,21 @@
 
 - name: "Backend DIR" 
   file:
-    path: ~/backed-application
+    path: ~/backed_application
     state: directory
 
 - name: "unarchive files" 
   unarchive:
     src: artifact.tar.gz
-    dest: ~/backed-application
+    dest: ~/backed_application
 
 - name: "Install dependencies" 
   shell: |
-    cd ~/backed-application
+    cd ~/backed_application
     npm i
+
+- name: "PM2 excussion"
+  shell: |
+    cd ~/backed_application/dist
+    pm2 stop default
+    pm2 start main.js
