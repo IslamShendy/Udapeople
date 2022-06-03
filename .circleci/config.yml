@@ -354,9 +354,9 @@ jobs:
             echo ${URL} 
             if curl -s ${URL} | grep "Welcome"
             then
-              exit 1
+              exit 0
             else
-              exit 2
+              exit 1
             fi
 
       - destroy-environment    
@@ -397,6 +397,22 @@ jobs:
 #             fi
             
 
+deploy-Prometheus-Server:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - install_awscli       
+      - run:
+          name: Prometheus Server creation
+          command: |
+            aws cloudformation deploy \
+              --template-file .circleci/files/PrometheusServer.yml \
+              --tags project=udapeoplecicd \
+              --stack-name "PrometheusServer-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+
+
 workflows:
   default:
     jobs:
@@ -429,3 +445,5 @@ workflows:
       #     requires: [smoke-test]
       # - cleanup:
       #     requires: [cloudfront-update]
+      - deploy-Prometheus-Server:
+          requires: [smoke-test]
