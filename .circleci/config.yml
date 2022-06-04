@@ -419,7 +419,7 @@ jobs:
                 aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
               fi        
               
-  deploy-Prometheus-Server:
+  Deploy-Prometheus-Server:
       docker:
         - image: cimg/base:stable
       steps:
