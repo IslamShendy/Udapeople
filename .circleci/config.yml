@@ -383,7 +383,7 @@ jobs:
                     --no-paginate --output text)
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold -d "${OldWorkflowID}"
+            curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold-${CIRCLE_WORKFLOW_ID:0:7} -d "${OldWorkflowID}"
       - run:
           name: Update cloudfront distribution
           command: |
@@ -410,7 +410,7 @@ jobs:
                 --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
               echo Stack names: "${STACKS[@]}" 
 
-              export OldWorkflowID=$(curl --insecure https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold)
+              export OldWorkflowID=$(curl --insecure https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold-${CIRCLE_WORKFLOW_ID:0:7})
               echo Workflow ID old: "${OldWorkflowID}"
               if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
               then
