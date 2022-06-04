@@ -8,14 +8,13 @@
 - name: "Copy artifact to backend app"
   copy:
     src: artifact.tar.gz
-    dest: ~/backed_application
-    remote_src: yes
+    dest: ~/backed_application/artifact.tar.gz
+  
 
 - name: "unarchive files" 
-  unarchive:
-    src: artifact.tar.gz
-    dest: ~/backed_application
-    remote_src: yes
+  shell: |
+    cd ~/backed_application
+    tar -xvzf artifact.tar.gz
     
 
 - name: "Install dependencies" 
