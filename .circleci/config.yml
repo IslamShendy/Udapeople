@@ -251,7 +251,6 @@ jobs:
               curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/migration_$\{CIRCLE_WORKFLOW_ID:0:7\} -d "1"
             else
               curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/migration_$\{CIRCLE_WORKFLOW_ID:0:7\} -d "0"
-              exit 1
             fi
 
       - destroy-environment    
@@ -384,7 +383,7 @@ jobs:
                     --no-paginate --output text)
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowID_OLD -d "${OldWorkflowID}"
+            curl https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold -d "${OldWorkflowID}"
       - run:
           name: Update cloudfront distribution
           command: |
@@ -411,7 +410,7 @@ cleanup:
               --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}" 
 
-            export OldWorkflowID=$(curl --insecure https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowID_OLD)
+            export OldWorkflowID=$(curl --insecure https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/WorkflowIDold)
             echo Workflow ID old: "${OldWorkflowID}"
             if [[ "${OldWorkflowID}" =~ "${STACKS[@]}"  ]]
             then
