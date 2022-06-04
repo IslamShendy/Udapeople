@@ -5,11 +5,17 @@
     path: ~/backed_application
     state: directory
 
+- name: "Copy artifact to backend app"
+  copy:
+    src: artifact.tar.gz
+    dest: ~/backed_application
+    remote_src: yes
 
 - name: "unarchive files" 
   unarchive:
     src: artifact.tar.gz
     dest: ~/backed_application
+    remote_src: yes
     
 
 - name: "Install dependencies" 
