@@ -303,15 +303,17 @@ jobs:
           command: |
             cd backend
             npm run build
-            tar -czf artifact.tar.gz dist/* package*
-            mkdir -p ~/project/.circleci/ansible/roles/deploy_backend/files/
-            cp -p artifact.tar.gz ~/project/.circleci/ansible/roles/deploy_backend/files/
+            cd ..
+            tar -C backend -czvf artifact.tar.gz .
+            mkdir -p .circleci/ansible/roles/deploy/files/
+            ls -l .circleci/ansible/roles/deploy/files/
+            cp -p artifact.tar.gz .circleci/ansible/roles/deploy/files/
       - run:
           name: Deploy backend
           command: |      
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
-            export TYPEORM_MIGRATIONS=./migrations/*{.ts,.js}
+            export TYPEORM_MIGRATIONS=./migrations/*.ts
             
             cd .circleci/ansible
             echo "Contents  of the inventory.txt file is -------"

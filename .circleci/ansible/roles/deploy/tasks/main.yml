@@ -5,26 +5,11 @@
     path: ~/backed_application
     state: directory
 
-- name: "copy backend binaries"
-  become: true
-  synchronize:
-    src: ../../backend/dist
+- name: "unarchive files"
+  unarchive:
+    src: artifact.tar.gz
     dest: ~/backed_application
-    recursive: true
-  
-- name: "copy node_modules"
-  become: true
-  synchronize:
-    src: ../../backend/node_modules
-    dest: ~/backed_application
-    recursive: true
 
-- name: "copy package"
-  become: true
-  synchronize:
-    src: ../../backend/package*
-    dest: ~/backed_application
-    recursive: true
     
 - name: "Install dependencies" 
   shell: |
