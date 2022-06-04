@@ -230,8 +230,8 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm install
             npm run migrations >> migrations_dump.txt
+            cat migrations_dump.txt | grep -i "has been executed successfully."
       - run:
           name: Send migration results to kvdb.io
           command: |
@@ -239,8 +239,6 @@ jobs:
             if grep -q "has been executed successfully." migrations_dump.txt
             then
               curl -d '1' https://kvdb.io/DK8YpNcGy3ZoUdkofavegF/migration_${CIRCLE_WORKFLOW_ID:0:7}  
-            else
-              exit 1
             fi
 
       - destroy-environment    
