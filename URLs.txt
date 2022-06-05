@@ -1,0 +1,5 @@
+[URL01]    https://github.com/IslamShendy/Udapeople
+[URL02]    http://udapeople-50523f2.s3.amazonaws.com/index.html#/employees
+[URL03]    http://d31vn0bfw4adce.cloudfront.net/#/employees
+[URL04]    http://54.89.82.135:3030/api/status
+[URL05]
