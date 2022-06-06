@@ -468,5 +468,5 @@ workflows:
           requires: [smoke-test]
       - cleanup:
           requires: [cloudfront-update]
-      - Deploy-Prometheus-Server:
-          requires: [cleanup]
+      # - Deploy-Prometheus-Server:
+      #     requires: [cleanup]
